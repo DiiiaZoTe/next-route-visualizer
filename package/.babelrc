@@ -1,0 +1,20 @@
+{
+  "presets": [
+    [
+      "next/babel"
+    ],
+    [
+      "@babel/preset-react",
+      {
+        "flow": false,
+        "typescript": true
+      }
+    ],
+    [
+      "@babel/preset-typescript"
+    ]
+  ],
+  "plugins": [
+    "@babel/plugin-proposal-do-expressions"
+  ]
+}

@@ -1,7 +1,14 @@
 {
   "name": "next-route-visualizer",
-  "version": "0.1.0",
+  "version": "1.0.0",
+  "description": "Visualize your Next.js app directory routes",
   "private": true,
+  "repository": {
+    "type": "git",
+    "url": "git+"
+  },
+  "author": "Alex Vencel",
+  "license": "ISC",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -14,9 +21,11 @@
     "@types/react-dom": "18.0.11",
     "eslint": "8.35.0",
     "eslint-config-next": "13.2.3",
+    "isc-license": "^1.0.3",
     "next": "13.2.3",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "reactflow": "^11.5.6",
     "typescript": "4.9.5"
   }
 }

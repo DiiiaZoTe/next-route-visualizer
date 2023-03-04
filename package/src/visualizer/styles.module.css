@@ -1,0 +1,201 @@
+.truncateText {
+  overflow: hidden;
+  width: 100%;
+  text-overflow: ellipsis;
+}
+
+.flow {
+  width: 100vw;
+  height: 100vh;
+  background-color: #fff;
+  display: flex;
+  flex-direction: row;
+  z-index: 999999;
+  position: fixed;
+  color: #000;
+  font-family: sans-serif;
+  box-sizing: border-box;
+}
+
+.reactFlow {
+  width: 100%;
+  height: 100%;
+  transition: all 0.3s ease-in-out;
+}
+.flow[data-menu='true'] .reactFlow {
+  width: 70%;
+}
+
+.flowPanel {
+  position: relative;
+  width: fit-content;
+  height: fit-content;
+  background: #fff;
+  top: 1rem;
+  left: 1rem;
+}
+
+.refreshButton {
+  padding: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #fff;
+  border: 1px solid #eaeaea;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  z-index: 9999999;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+}
+
+.refreshButton:hover .refreshIcon {
+  -webkit-animation: rotating 2s linear infinite;
+  -moz-animation: rotating 2s linear infinite;
+  -ms-animation: rotating 2s linear infinite;
+  -o-animation: rotating 2s linear infinite;
+  animation: rotating 2s linear infinite;
+}
+
+.refreshIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sideDashBoard {
+  min-width: 300px;
+  width: 30%;
+  background: #fafafa;
+  border-right: 1px solid #eaeaea;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  transition: all 0.3s ease-in-out;
+  padding: 1.5rem;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+.flow[data-menu='false'] .sideDashBoard {
+  width: 0;
+  padding: 0;
+  min-width: 0;
+}
+.sideDashBoard * {
+  opacity: 1;
+  transition: all 0.3s ease-in-out;
+  transition-delay: 0.3s;
+}
+.flow[data-menu='false'] .sideDashBoard * {
+  opacity: 0;
+  transition: all 0s ease-in-out;
+}
+
+.sideDashBoard p {
+  margin: 0;
+}
+
+.sideDashHeader {
+  font-size: 1.5rem;
+  font-weight: bolder;
+  display: flex;
+  justify-content: space-between;
+}
+
+.sideDashGroup {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.sideDashGroupHeader {
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+.sideDashGroupItem {
+  width: 100%;
+  background: #f0f0f0;
+  border-radius: 0.5rem;
+  padding: 0.5rem 1rem;
+  text-align: left;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  border: 1px solid #eaeaea;
+  box-sizing: border-box;
+  font-family: monospace;
+}
+
+.sideDashGroupItemError {
+  /* tailwincss rose-100 */
+  background: #fce7f3;
+  /* tailwincss rose-500 */
+  color: #ec4899;
+  border: 1px solid #ec4899;
+}
+
+.sideDashGroupLink {
+  word-break: break-word;
+}
+
+.sideDashGroupLinkIcon *{
+  margin-left: auto;
+  transition: color 0s;
+}
+
+/* ===== NODE CSS ===== */
+.nodeSelected {
+  opacity: 0;
+  transition: all 0.2s ease-in-out;
+  cursor: pointer;
+}
+
+.nodeSelected[data-selected='false']:hover {
+  opacity: 0.2;
+}
+
+.nodeSelected[data-selected='true'] {
+  opacity: 1;
+}
+
+.nodeIconsContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+@-webkit-keyframes rotating /* Safari and Chrome */ {
+  from {
+    -webkit-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  to {
+    -webkit-transform: rotate(360deg);
+    -o-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+@keyframes rotating {
+  from {
+    -ms-transform: rotate(0deg);
+    -moz-transform: rotate(0deg);
+    -webkit-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  to {
+    -ms-transform: rotate(360deg);
+    -moz-transform: rotate(360deg);
+    -webkit-transform: rotate(360deg);
+    -o-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}

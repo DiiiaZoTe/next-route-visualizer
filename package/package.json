@@ -1,0 +1,39 @@
+{
+  "name": "next-route-visualizer",
+  "version": "1.0.0",
+  "description": "Visualize your Next.js app directory routes",
+  "main": "dist/visualizer/index.js",
+  "types": "types/src/visualizer/index.d.ts",
+  "keywords": [
+    "Next",
+    "Route",
+    "Visualizer",
+    "Visualize",
+    "Links"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+"
+  },
+  "author": "Alex Vencel",
+  "license": "ISC",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "cleanup": "rm -rf dist && rm -rf types",
+    "build": "babel src -d dist --extensions \".ts,.tsx\" --ignore \"**/*.test.tsx\" && cp src/visualizer/styles.module.css dist/visualizer/styles.module.css",
+    "build:types": "tsc -d --emitDeclarationOnly --outDir types"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.21.0",
+    "@babel/core": "^7.21.0",
+    "@babel/plugin-proposal-do-expressions": "^7.18.6",
+    "@babel/preset-react": "^7.18.6",
+    "@babel/preset-typescript": "^7.21.0"
+  },
+  "peerDependencies": {
+    "next": ">= 13.2.3",
+    "react": ">= 18.2.0",
+    "react-dom": ">= 18.2.0",
+    "reactflow": ">= 11.5.6"
+  }
+}
