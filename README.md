@@ -13,7 +13,7 @@ This package aims to help developers better understand the routes in their Next.
 This package can be useful if you are new to the app directory and need to visualize it.
 
 <div align="center">
-  <img src="https://github.com/DiiiaZoTe/next-route-visualizer/tree/main/public/next-route-visualizer-preview.png" alt="Preview Next Route Visualizer" width="400"/>
+  <img src="https://next-route-visualizer.vercel.app/next-route-visualizer-preview.png" alt="Preview Next Route Visualizer" width="400"/>
 </div>
 
 ---
