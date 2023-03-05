@@ -23,3 +23,4 @@ export declare const FilesLoadingIcon: ({ color }: {
 export declare const CloseIcon: ({ color }: {
     color?: string;
 }) => JSX.Element;
+export declare const GithubLogo: () => JSX.Element;
