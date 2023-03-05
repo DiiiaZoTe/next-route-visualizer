@@ -1,8 +1,8 @@
 <div align="center">
   <h1>next-route-visualizer</h1>
   <p>A package for visualizing Next.js app directory routes.</p>
-  <a href="">
-    Demo website
+  <a href="https://next-route-visualizer-eufp7fbs4-diiiazote.vercel.app">
+    <b>Demo website</b>
   </a>
 </div>
 
@@ -47,10 +47,10 @@ That's it! The **`Visualizer`** component will render a tree chart that displays
 
 ### Visualizer props
 
-| Prop name   | Type                  | Description
-| ----------- | -------               | ------------
-| path        | `String | undefined`  |  <p>Path to the starting route (relative to the app directory).<br/>If not provided, the component will search for the app directory within the root folder or .src/ folder.</p>
-| baseURL     | `String | undefined`  | <p>Base URL of your project.<br/>Default: http://localhost:3000</p>
+| Prop name   | Type                 | Description
+| ----------- | -------              | ------------
+| path        | String or undefined  |  <p>Path to the starting route (relative to the app directory).<br/>If not provided, the component will search for the app directory within the root folder or .src/ folder.</p>
+| baseURL     | String or undefined  | <p>Base URL of your project.<br/>Default: http://localhost:3000</p>
 
 ---
 ## Example
@@ -129,5 +129,3 @@ Note: I didn't use tailwind or any other packages for the styles.
 Next Router Visualizer is ISC licensed.
 
 <a href="https://www.buymeacoffee.com/alexvencel" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" height="60" /></a>
-
-
