@@ -13,7 +13,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+"
+    "url": "git+https://github.com/DiiiaZoTe/next-route-visualizer"
   },
   "author": "Alex Vencel",
   "license": "ISC",

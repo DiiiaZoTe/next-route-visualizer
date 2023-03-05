@@ -148,6 +148,29 @@
   transition: color 0s;
 }
 
+.sidedashGithub {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: auto;
+}
+
+.sidedashGithub a {
+  color: #000;
+  text-decoration: none;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.sidedashGithub span {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 /* ===== NODE CSS ===== */
 .nodeSelected {
   opacity: 0;

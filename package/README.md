@@ -10,7 +10,11 @@
 **Next Route Visualizer** is designed to display the routes for the app directory of Next.js (starting at version 13) in a visual tree-like fashion.
 This package aims to help developers better understand the routes in their Next.js app directory by providing a clear visual representation of the routes and their relationships.
 
-This package can be useful if you are just starting using the app directory.
+This package can be useful if you are new to the app directory and need to visualize it.
+
+<div align="center">
+  <img src="https://github.com/DiiiaZoTe/next-route-visualizer/tree/main/public/next-route-visualizer-preview.png" alt="Preview Next Route Visualizer" width="400"/>
+</div>
 
 ---
 ## Usage

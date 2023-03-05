@@ -15,7 +15,7 @@ import ReactFlow, {
 import "reactflow/dist/base.css";
 
 import RouteNode from "./flow-nodes";
-import { CloseIcon, ExternalLinkIcon, RefreshIcon } from "./other-components";
+import { CloseIcon, ExternalLinkIcon, GithubLogo, RefreshIcon } from "./other-components";
 import { NODE_WIDTH, NODE_HEIGHT, NODE_BORDER } from "./constants";
 
 import styles from "./styles.module.css";
@@ -155,6 +155,12 @@ const Flow = (props: FlowProps) => {
               None
             </p>
           ) : null}
+        </div>
+        <div className={styles.sidedashGithub}>
+          <a href="https://github.com/DiiiaZoTe/next-route-visualizer">
+            <span>Github</span>
+            <GithubLogo />
+          </a>
         </div>
       </div>
       <ReactFlow

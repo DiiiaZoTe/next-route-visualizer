@@ -1,7 +1,7 @@
 export default function Home() {
   return (
     <div>
-      <h1>Blog page</h1>
+      <h1>This is the settings page</h1>
     </div>
-  )
+  );
 }
