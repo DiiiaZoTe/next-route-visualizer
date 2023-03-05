@@ -12,6 +12,7 @@
   flex-direction: row;
   z-index: 999999;
   position: fixed;
+  top: 0;
   color: #000;
   font-family: sans-serif;
   box-sizing: border-box;
@@ -22,7 +23,7 @@
   height: 100%;
   transition: all 0.3s ease-in-out;
 }
-.flow[data-menu='true'] .reactFlow {
+.flow[data-menu="true"] .reactFlow {
   width: 70%;
 }
 
@@ -75,7 +76,7 @@
   overflow-x: hidden;
   overflow-y: auto;
 }
-.flow[data-menu='false'] .sideDashBoard {
+.flow[data-menu="false"] .sideDashBoard {
   width: 0;
   padding: 0;
   min-width: 0;
@@ -85,7 +86,7 @@
   transition: all 0.3s ease-in-out;
   transition-delay: 0.3s;
 }
-.flow[data-menu='false'] .sideDashBoard * {
+.flow[data-menu="false"] .sideDashBoard * {
   opacity: 0;
   transition: all 0s ease-in-out;
 }
@@ -143,7 +144,7 @@
   word-break: break-word;
 }
 
-.sideDashGroupLinkIcon *{
+.sideDashGroupLinkIcon * {
   margin-left: auto;
   transition: color 0s;
 }
@@ -178,11 +179,11 @@
   cursor: pointer;
 }
 
-.nodeSelected[data-selected='false']:hover {
+.nodeSelected[data-selected="false"]:hover {
   opacity: 0.2;
 }
 
-.nodeSelected[data-selected='true'] {
+.nodeSelected[data-selected="true"] {
   opacity: 1;
 }
 
