@@ -122,6 +122,7 @@ On that note, please feel free to use and make any changes that you wish to incl
 ## Dependencies
 - Next >= 13.2.3
 - ReactFlow >= 11.5.6
+
 Note: I didn't use tailwind or any other packages for the styles.
 
 ## License
