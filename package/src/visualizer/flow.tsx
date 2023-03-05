@@ -15,7 +15,12 @@ import ReactFlow, {
 import "reactflow/dist/base.css";
 
 import RouteNode from "./flow-nodes";
-import { CloseIcon, ExternalLinkIcon, GithubLogo, RefreshIcon } from "./other-components";
+import {
+  CloseIcon,
+  ExternalLinkIcon,
+  GithubLogo,
+  RefreshIcon,
+} from "./other-components";
 import { NODE_WIDTH, NODE_HEIGHT, NODE_BORDER } from "./constants";
 
 import styles from "./styles.module.css";
@@ -115,7 +120,10 @@ const Flow = (props: FlowProps) => {
             <span
               className={styles.sideDashGroupLink}
               dangerouslySetInnerHTML={{
-                __html: selectedNode?.data?.link.replace(/\//g, "/<wbr>"),
+                __html: selectedNode?.data?.link
+                  .replace(/\//g, "/<wbr>")
+                  .replace(/\./g, ".<wbr>")
+                  .replace(/\-/g, "-<wbr>"),
               }}
             />
             <a
