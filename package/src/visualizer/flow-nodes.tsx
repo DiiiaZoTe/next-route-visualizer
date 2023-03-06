@@ -1,54 +1,54 @@
-'use client';
+"use client";
 
-import { memo, FC, CSSProperties, useMemo } from 'react';
-import { Handle, Position, NodeProps } from 'reactflow';
+import { memo, FC, CSSProperties, useMemo } from "react";
+import { Handle, Position, NodeProps } from "reactflow";
 import {
   HANDLE_SIZE,
   NODE_WIDTH,
   NODE_HEIGHT,
   NODE_BORDER,
   NODE_BORDER_RADIUS,
-} from './constants';
+} from "./constants";
 import {
   FilesPageIcon,
   FilesErrorIcon,
   FilesLayoutIcon,
   FilesLoadingIcon,
   FilesRouteIcon,
-} from './other-components';
+} from "./other-components";
 
-import styles from './styles.module.css';
+import styles from "./styles.module.css";
 
 const SELECTION_BOX = 50;
 
 const HandleCommonStyle: CSSProperties = {
-  minWidth: '0px',
-  minHeight: '0px',
+  minWidth: "0px",
+  minHeight: "0px",
   width: `${HANDLE_SIZE}px`,
   height: `${HANDLE_SIZE}px`,
-  background: 'transparent',
+  background: "transparent",
 };
 
 const Box: CSSProperties = {
-  display: 'flex',
-  flexDirection: 'column',
-  justifyContent: 'space-around',
-  alignItems: 'center',
+  display: "flex",
+  flexDirection: "column",
+  justifyContent: "space-around",
+  alignItems: "center",
   flexGrow: 1,
   width: `${NODE_WIDTH}px`,
   height: `${NODE_HEIGHT}px`,
-  padding: '1rem',
-  fontSize: '1.2rem',
-  boxSizing: 'border-box',
+  padding: "1rem",
+  fontSize: "1.2rem",
+  boxSizing: "border-box",
 };
 
 const titleStyle: CSSProperties = {
-  textAlign: 'center',
-  fontWeight: 'bolder',
+  textAlign: "center",
+  fontWeight: "bolder",
 };
 
 const SelectedBox: CSSProperties = {
-  position: 'absolute',
+  position: "absolute",
   top: `-${SELECTION_BOX / 2}px`,
   left: `-${SELECTION_BOX / 2}px`,
   width: `calc(100% + ${SELECTION_BOX}px)`,
@@ -58,10 +58,6 @@ const SelectedBox: CSSProperties = {
 };
 
 const RouteNode: FC<NodeProps> = ({ id, data, xPos, yPos }) => {
-  const includedFiles = useMemo(() => {
-    return Object.keys(data?.includedFiles ?? {});
-  }, [data?.includedFiles]);
-
   return (
     <>
       <div style={Box}>
@@ -72,24 +68,23 @@ const RouteNode: FC<NodeProps> = ({ id, data, xPos, yPos }) => {
           {data.name}
         </p>
         <div className={styles.nodeIconsContainer}>
-          {includedFiles.find((file) => file.startsWith('page.')) ? (
+          {data.nextFiles?.find((file) => file.startsWith("page.")) ? (
             <FilesPageIcon color={data.borderColor} />
           ) : null}
-          {includedFiles.find(
-            (file) => file.startsWith('error.') || file.startsWith('error.'),
+          {data.nextFiles?.find(
+            (file) => file.startsWith("error.") || file.startsWith("error.")
           ) ? (
             <FilesErrorIcon color={data.borderColor} />
           ) : null}
-          {includedFiles.find(
-            (file) =>
-              file.startsWith('layout.') || file.startsWith('template.'),
+          {data.nextFiles?.find(
+            (file) => file.startsWith("layout.") || file.startsWith("template.")
           ) ? (
             <FilesLayoutIcon color={data.borderColor} />
           ) : null}
-          {includedFiles.find((file) => file.startsWith('route.')) ? (
+          {data.nextFiles?.find((file) => file.startsWith("route.")) ? (
             <FilesRouteIcon color={data.borderColor} />
           ) : null}
-          {includedFiles.find((file) => file.startsWith('loading.')) ? (
+          {data.nextFiles?.find((file) => file.startsWith("loading.")) ? (
             <FilesLoadingIcon color={data.borderColor} />
           ) : null}
         </div>
@@ -121,7 +116,7 @@ const RouteNode: FC<NodeProps> = ({ id, data, xPos, yPos }) => {
       <div
         style={{ ...SelectedBox, borderColor: data.borderColor }}
         className={styles.nodeSelected}
-        data-selected={data.selected ? 'true' : 'false'}
+        data-selected={data.selected ? "true" : "false"}
       />
     </>
   );

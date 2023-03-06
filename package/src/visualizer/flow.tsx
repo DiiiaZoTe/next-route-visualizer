@@ -85,17 +85,13 @@ const Flow = (props: FlowProps) => {
     return nodes.find((node) => node.id === selectedNodeID);
   }, [selectedNodeID, nodes]);
 
-  const includedFiles = useMemo(() => {
-    return Object.keys(selectedNode?.data?.includedFiles ?? {});
-  }, [selectedNode]);
-
   const validLink = useMemo(() => {
     if (!selectedNode?.data?.link) return "";
-    const hasLink = includedFiles.map((file) => {
+    const hasLink = selectedNode?.data?.nextFiles.some((file) => {
       return file.startsWith("page.") || file.startsWith("route.");
     });
-    return hasLink.length ? selectedNode?.data?.link : "";
-  }, [selectedNode, includedFiles]);
+    return hasLink ? selectedNode?.data?.link : "";
+  }, [selectedNode]);
 
   return (
     <div
@@ -151,14 +147,14 @@ const Flow = (props: FlowProps) => {
         </div>
         <div className={styles.sideDashGroup}>
           <p className={styles.sideDashGroupHeader}>NextJS files:</p>
-          {includedFiles.map((file) => {
+          {selectedNode?.data?.nextFiles?.map((file) => {
             return (
               <p key={file} className={styles.sideDashGroupItem}>
                 {file}
               </p>
             );
           })}
-          {includedFiles.length === 0 ? (
+          {selectedNode?.data?.nextFiles?.length === 0 ? (
             <p
               className={
                 styles.sideDashGroupItem + " " + styles.sideDashGroupItemError
@@ -166,6 +162,19 @@ const Flow = (props: FlowProps) => {
             >
               None
             </p>
+          ) : null}
+        </div>
+        <div className={styles.sideDashGroup}>
+          <p className={styles.sideDashGroupHeader}>Other files:</p>
+          {selectedNode?.data?.otherFiles?.map((file) => {
+            return (
+              <p key={file} className={styles.sideDashGroupItem}>
+                {file}
+              </p>
+            );
+          })}
+          {selectedNode?.data?.otherFiles?.length === 0 ? (
+            <p className={styles.sideDashGroupItem}>None</p>
           ) : null}
         </div>
         <div className={styles.sidedashGithub}>

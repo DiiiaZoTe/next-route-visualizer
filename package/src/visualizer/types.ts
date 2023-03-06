@@ -9,9 +9,8 @@ export type RouteData = {
   spanSize?: number;
   directlySpanning: number;
   parentID?: string;
-  includedFiles?: {
-    [key: string]: boolean;
-  };
+  nextFiles?: string[];
+  otherFiles?: string[];
   childrenID?: string[];
   x?: number;
   y?: number;

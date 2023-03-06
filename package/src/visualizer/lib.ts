@@ -113,6 +113,17 @@ export const getRoutesHelper = (path: string, link: string, depth: number = 0, p
     const routeName = path.split('/')?.pop() ?? path;
     if (isGroup) depth = depth - 1;
 
+    // use a reduce to seperate the files into next files and other files
+    const { nextFiles, otherFiles } = files.reduce(
+      (acc, file) => {
+        const isNextFile = NEXT_FILES.some((nextFile) => file.startsWith(nextFile));
+        if (isNextFile) acc.nextFiles.push(file);
+        else acc.otherFiles.push(file);
+        return acc;
+      },
+      { nextFiles: [], otherFiles: [] } as { nextFiles: string[]; otherFiles: string[] },
+    );
+
     const data: RouteData = {
       id: routeID,
       name: routeName,
@@ -124,14 +135,8 @@ export const getRoutesHelper = (path: string, link: string, depth: number = 0, p
       maxSpan: 1,
       spanSize: NODE_WIDTH,
       directlySpanning: 0,
-      includedFiles: {
-        // go through the files, if the file is a next file, assign true to the key
-        ...files.reduce((acc, file) => {
-          const isNextFile = NEXT_FILES.some((nextFile) => file.startsWith(nextFile));
-          acc[file] = isNextFile;
-          return acc;
-        }, {} as { [key: string]: boolean }),
-      },
+      nextFiles: nextFiles,
+      otherFiles: otherFiles,
       childrenID: [
         ...folders.map((folder) =>
           createHash('sha256').update(`${path}/${folder}`).digest('hex'),
@@ -323,7 +328,8 @@ export const createNodesAndEdges = (route: Route) => {
         color: color,
         borderColor: borderColor,
         childrenID: current.childrenID,
-        includedFiles: current.includedFiles,
+        nextFiles: current.nextFiles,
+        otherFiles: current.otherFiles,
       },
       type: 'routeNode',
       position: { x: current.x ?? 0, y: current.y ?? 0 },
@@ -427,7 +433,7 @@ const hideColocationFn = (route: Route) => {
     const child = route.children[i];
 
     // Check if any included file starts with "page." or "route."
-    const hasPageOrRouteFile = Object.keys(child.data.includedFiles ?? {}).some(
+    const hasPageOrRouteFile = child?.data?.nextFiles.some(
       fileName => fileName.startsWith('page.') || fileName.startsWith('route.')
     );
 
