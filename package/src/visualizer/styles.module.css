@@ -149,6 +149,10 @@
   transition: color 0s;
 }
 
+.sideDashGroupLinkIcon[data-valid="false"] {
+  pointer-events: none;
+}
+
 .sidedashGithub {
   display: flex;
   align-items: center;

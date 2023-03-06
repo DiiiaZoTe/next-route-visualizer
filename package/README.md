@@ -1,7 +1,7 @@
 <div align="center">
   <h1>next-route-visualizer</h1>
   <p>A package for visualizing Next.js app directory routes.</p>
-  <a href="https://next-route-visualizer-eufp7fbs4-diiiazote.vercel.app">
+  <a href="https://next-route-visualizer.vercel.app">
     <b>Demo website</b>
   </a>
 </div>
@@ -114,7 +114,7 @@ For that reason, **you must refresh the page** to see any changes that you appli
 
 ---
 ## Future work
-This is a side project and I do not intend to maintain this component or resolve any issues in the future. The code is definitely a mess and I was too lazy to provide testing for it. I may be open to make a few changes if I feel like it.
+This is only side project. The code is definitely a mess and I was too lazy to provide testing for it. I may be open to make a few changes on my free time if I feel like it.
 
 On that note, please feel free to use and make any changes that you wish to include.
 
@@ -122,6 +122,7 @@ On that note, please feel free to use and make any changes that you wish to incl
 ## Dependencies
 - Next >= 13.2.3
 - ReactFlow >= 11.5.6
+
 Note: I didn't use tailwind or any other packages for the styles.
 
 ## License

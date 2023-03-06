@@ -16,12 +16,29 @@ import {
   NODE_BORDER
 } from './constants';
 
+import type { Node, Edge } from 'reactflow';
+
+import type { VisualizerProps } from './visualizer';
+
+export const getNodesAndEdges = (props: VisualizerProps) => {
+  const { path, baseURL, hideColocation } = props;
+  // initialize the tree of routes
+  let route = getRoutes(path, baseURL);
+  // hide colocation if the option is set
+  if (hideColocation) route = postorderTraversal(route, hideColocationFn);
+  // set the spans of the tree route (nodes)
+  route = postorderTraversal(route, setRouteSpans);
+  // position the tree nodes
+  route = positionTree(route);
+  // create the nodes and edges
+  return createNodesAndEdges(route);
+}
+
 /**
  * Get the routes from a path. If no path is provided, it will try to find the app directory
  * @param path - path to get routes from
  * @returns 
  */
-
 export const getRoutes = (path?: string, baseURL?: string,) => {
   baseURL = baseURL ?? FALLBACK_BASE_URL;
   if (!path || path === '') {
@@ -125,12 +142,6 @@ export const getRoutesHelper = (path: string, link: string, depth: number = 0, p
       ...folders.map((folder, index) => getRoutesHelper(`${path}/${folder}`, `${link}/${folder}`, depth + 1, routeID)),
     ];
 
-    // get the span
-    const { maxSpan, spanning } = getSpan(children);
-    data.maxSpan = maxSpan === 0 ? 1 : maxSpan;
-    data.directlySpanning = spanning;
-    data.spanSize = getSpanSize(data.maxSpan);
-
     const route: Route = {
       data,
       children,
@@ -162,8 +173,6 @@ export const isDirectory = (path: string) => {
  */
 export const isAllowedFile = (path: string) => {
   try {
-
-
     // Check if file
     if (!fs.lstatSync(path).isFile()) return false;
 
@@ -221,16 +230,6 @@ const isRouteSegment = (path: string) => {
   // if file name start with [ and end with ] it is a route segment
   if (fileName?.startsWith('[') && fileName?.endsWith(']')) return true;
   return false;
-}
-
-
-/**
- * calculate the span size from the max span
- * @param span 
- * @returns 
- */
-const getSpanSize = (span: number) => {
-  return (span * NODE_WIDTH + (span - 1) * NODE_SPACING_X);
 }
 
 /**
@@ -303,14 +302,17 @@ const positionTree = (root: Route) => {
  * @returns 
  */
 export const createNodesAndEdges = (route: Route) => {
-  // position the tree and convert to array
-  const routesPositioned = positionTree(route);
-  const routesArray = routeToArray(routesPositioned);
+  const routesArray = routeToArray(route);
 
-  // convert to nodes
-  const nodes = routesArray.map((current) => {
+  let nodes: Node[] = [];
+  let edges: Edge[] = [];
+
+  routesArray.forEach((current) => {
+    // get colors
     const { color, borderColor } = getNodeColorsByType(current.type);
-    const node = {
+
+    //! create node
+    nodes.push({
       id: current.id,
       data: {
         name: current.name,
@@ -325,7 +327,7 @@ export const createNodesAndEdges = (route: Route) => {
       },
       type: 'routeNode',
       position: { x: current.x ?? 0, y: current.y ?? 0 },
-      deleteable: false,
+      deletable: false,
       draggable: false,
       style: {
         width: NODE_WIDTH,
@@ -336,38 +338,36 @@ export const createNodesAndEdges = (route: Route) => {
         borderColor: borderColor,
         display: 'flex',
       }
-    };
-    return node;
-  });
+    });
 
-  // convert to edges
-  let edges: any = [];
-  routesArray.map((current, index) => {
+    //! create edges for children
     current.childrenID?.map((childID) => {
       // get the child node
       const childNode = routesArray.find(node => node.id === childID);
-      const { color, borderColor } = getNodeColorsByType(childNode?.type ?? 'Route');
+
+      const { color: childColor, borderColor: childBorderColor } = getNodeColorsByType(childNode?.type ?? 'Route');
       edges.push({
         id: `${current.id}-${childID}`,
         source: current.id,
         target: childID,
-        deleteable: false,
+        deletable: false,
         markerEnd: {
-          type: 'arrow',
+          type: "arrow" as any,
           width: 10,
           height: 10,
           strokeWidth: 2,
-          color: `${borderColor}`,
+          color: `${childBorderColor}`,
         },
         style: {
           strokeWidth: NODE_BORDER * 1.5,
-          stroke: `${borderColor}`,
+          stroke: `${childBorderColor}`,
         },
         sourceHandle: childNode?.type === 'Group' ? 'Group' : 'Normal',
         targetHandle: childNode?.type === 'Group' ? 'Group' : 'Normal',
       });
     });
   });
+
   return { nodes, edges };
 };
 
@@ -395,6 +395,73 @@ const getNodeColorsByType = (type: string) => {
       return { color: '#ede9fe', borderColor: '#8b5cf6' };
   }
 };
+
+/**
+ * The best way to apply some modification to the route tree using a postorder traversal.
+ * Or how I call it... the saving grace of my problems here! LOL
+ * @param route 
+ * @param modifierFn A function that takes a route and returns a route modified in some way
+ * @returns Route
+ */
+const postorderTraversal = (route: Route, modifierFn: (route: Route) => Route) => {
+  if (!route.children) {
+    return modifierFn(route);
+  }
+  route.children = route.children.map((child) => postorderTraversal(child, modifierFn)).filter((child) => child !== null) as Route[];
+  return modifierFn(route);
+}
+
+/**
+ * 
+ * @param route 
+ * @returns 
+ */
+const hideColocationFn = (route: Route) => {
+  // if no children, return route
+  if (!route.children || route.children.length === 0) {
+    return route;
+  }
+
+  //check if children have page or route files
+  for (let i = 0; i < route.children.length; i++) {
+    const child = route.children[i];
+
+    // Check if any included file starts with "page." or "route."
+    const hasPageOrRouteFile = Object.keys(child.data.includedFiles ?? {}).some(
+      fileName => fileName.startsWith('page.') || fileName.startsWith('route.')
+    );
+
+    // Delete child node if it doesn't have a page or route file and has no children
+    if (!hasPageOrRouteFile && (!child.children || child.children.length === 0)) {
+      route.children.splice(i, 1);
+      i--;
+    }
+  }
+  return route;
+}
+
+/**
+ * Set the spans for the route and subroutes.
+ * This is useful to calculate the x position of the nodes later
+ * @param route 
+ * @returns Route
+ */
+const setRouteSpans = (route: Route) => {
+  //apply default if no children
+  if (!route.children || route.children.length === 0) {
+    route.data.maxSpan = 1;
+    route.data.spanSize = NODE_WIDTH;
+    route.data.directlySpanning = 0;
+    return route;
+  }
+  // get the span
+  const { maxSpan, spanning } = getSpan(route.children);
+  route.data.maxSpan = maxSpan === 0 ? 1 : maxSpan;
+  route.data.directlySpanning = spanning;
+  route.data.spanSize = getSpanSize(route.data.maxSpan);
+
+  return route;
+}
 
 /**
  * Get the span for all the children of the route.
@@ -426,3 +493,11 @@ const getSpan = (routes: Route[],) => {
   }
 }
 
+/**
+ * calculate the span size from the max span
+ * @param span 
+ * @returns 
+ */
+const getSpanSize = (span: number) => {
+  return (span * NODE_WIDTH + (span - 1) * NODE_SPACING_X);
+}

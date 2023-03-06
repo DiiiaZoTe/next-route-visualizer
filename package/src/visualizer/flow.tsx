@@ -1,7 +1,8 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
+
 import ReactFlow, {
   Node,
   Edge,
@@ -22,7 +23,6 @@ import {
   RefreshIcon,
 } from "./other-components";
 import { NODE_WIDTH, NODE_HEIGHT, NODE_BORDER } from "./constants";
-
 import styles from "./styles.module.css";
 
 const nodeTypes = {
@@ -120,10 +120,13 @@ const Flow = (props: FlowProps) => {
             <span
               className={styles.sideDashGroupLink}
               dangerouslySetInnerHTML={{
-                __html: selectedNode?.data?.link
-                  .replace(/\//g, "/<wbr>")
-                  .replace(/\./g, ".<wbr>")
-                  .replace(/\-/g, "-<wbr>"),
+                __html:
+                  validLink !== ""
+                    ? selectedNode?.data?.link
+                        .replace(/\//g, "/<wbr>")
+                        .replace(/\./g, ".<wbr>")
+                        .replace(/\-/g, "-<wbr>")
+                    : "None",
               }}
             />
             <a
@@ -132,6 +135,7 @@ const Flow = (props: FlowProps) => {
               target="_blank"
               rel="noreferrer"
               className={styles.sideDashGroupLinkIcon}
+              data-valid={validLink !== "" ? "true" : "false"}
             >
               <ExternalLinkIcon color={validLink !== "" ? "#000" : "#ccc"} />
             </a>

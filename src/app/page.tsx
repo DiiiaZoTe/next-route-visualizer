@@ -10,6 +10,7 @@ export default function Home() {
           ? "https://next-route-visualizer.vercel.app"
           : undefined
       }
+      hideColocation
     />
   );
 }

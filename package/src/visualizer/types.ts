@@ -5,8 +5,8 @@ export type RouteData = {
   type: string | 'Route' | 'Group' | 'Segment' | 'Root';
   link: string;
   depth: number;
-  maxSpan: number;
-  spanSize: number;
+  maxSpan?: number;
+  spanSize?: number;
   directlySpanning: number;
   parentID?: string;
   includedFiles?: {

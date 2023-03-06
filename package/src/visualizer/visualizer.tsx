@@ -1,7 +1,8 @@
 // this needs to be a server component or it will not fetch the routes
 
-import { getRoutes, createNodesAndEdges } from './lib';
-import Flow from './flow';
+import React from "react";
+import { getNodesAndEdges } from "./lib";
+import Flow from "./flow";
 
 export type VisualizerProps = {
   /**
@@ -14,11 +15,19 @@ export type VisualizerProps = {
    * @default string http://localhost:3000
    */
   baseURL?: string;
+  /**
+   * hide colocating folders in the visualizer
+   * @default boolean false
+   */
+  hideColocation?: boolean;
 };
 
-export const Visualizer = (props: VisualizerProps) => {
-  const route = getRoutes(props.path, props.baseURL);
-  const { nodes, edges } = createNodesAndEdges(route);
+export const Visualizer = ({
+  path,
+  baseURL = "http://localhost:3000",
+  hideColocation = false,
+}: VisualizerProps) => {
+  const { nodes, edges } = getNodesAndEdges({ path, baseURL, hideColocation });
   return (
     <>
       <Flow initialNodes={nodes} initialEdges={edges} />
