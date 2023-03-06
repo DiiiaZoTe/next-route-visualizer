@@ -91,6 +91,20 @@
   opacity: 0;
   transition: all 0s ease-in-out;
 }
+/* scrollbar */
+.sideDashBoard::-webkit-scrollbar {
+  width: 10px;
+}
+.sideDashBoard::-webkit-scrollbar-track {
+  background: #f0f0f0;
+}
+.sideDashBoard::-webkit-scrollbar-thumb {
+  background: #ccc;
+  border-radius: 10px;
+}
+.sideDashBoard::-webkit-scrollbar-thumb:hover {
+  background: #999;
+}
 
 .sideDashBoard p {
   margin: 0;
