@@ -1,7 +1,7 @@
 <div align="center">
   <h1>next-route-visualizer</h1>
   <p>A package for visualizing Next.js app directory routes.</p>
-  <a href="https://next-route-visualizer-eufp7fbs4-diiiazote.vercel.app">
+  <a href="https://next-route-visualizer.vercel.app">
     <b>Demo website</b>
   </a>
 </div>
