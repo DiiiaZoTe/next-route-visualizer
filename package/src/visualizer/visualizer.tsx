@@ -19,15 +19,19 @@ export type VisualizerProps = {
    * hide colocating folders in the visualizer
    * @default boolean false
    */
-  hideColocation?: boolean;
+  displayColocation?: boolean;
 };
 
 export const Visualizer = ({
   path,
   baseURL = "http://localhost:3000",
-  hideColocation = false,
+  displayColocation = false,
 }: VisualizerProps) => {
-  const { nodes, edges } = getNodesAndEdges({ path, baseURL, hideColocation });
+  const { nodes, edges } = getNodesAndEdges({
+    path,
+    baseURL,
+    displayColocation,
+  });
   return (
     <>
       <Flow initialNodes={nodes} initialEdges={edges} />

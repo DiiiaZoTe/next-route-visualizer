@@ -13,7 +13,7 @@ This package aims to help developers better understand the routes in their Next.
 This package can be useful if you are new to the app directory and need to visualize it.
 
 <div align="center">
-  <img src="https://next-route-visualizer.vercel.app/next-route-visualizer-preview.png" alt="Preview Next Route Visualizer" width="400"/>
+  <img src="https://next-route-visualizer.vercel.app/next-route-visualizer-preview.png" alt="Preview Next Route Visualizer" width="600"/>
 </div>
 
 ---
@@ -47,10 +47,11 @@ That's it! The **`Visualizer`** component will render a tree chart that displays
 
 ### Visualizer props
 
-| Prop name   | Type                 | Description
-| ----------- | -------              | ------------
-| path        | String or undefined  |  <p>Path to the starting route (relative to the app directory).<br/>If not provided, the component will search for the app directory within the root folder or .src/ folder.</p>
-| baseURL     | String or undefined  | <p>Base URL of your project.<br/>Default: http://localhost:3000</p>
+| Prop name         | Type                 | Description
+| ----------------- | -------------------- | ------------
+| path              | String or undefined  |  <p>Path to the starting route (relative to the app directory).<br/>If not provided, the component will search for the app directory within the root folder or .src/ folder.</p>
+| baseURL           | String or undefined  | <p>Base URL of your project.<br/>Default: http://localhost:3000</p>
+| displayColocation | Boolean or undefined | <p>Display colocating folders<br/>Default: false</p>
 
 ---
 ## Example
@@ -105,6 +106,7 @@ Under the hood, **next-route-visualizer** utilizes **[ReactFlow](https://reactfl
   - <svg width="24" height="24" fill="grey" viewBox="0 0 16 16">
       <path d="M9.293 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V4.707A1 1 0 0 0 13.707 4L10 .293A1 1 0 0 0 9.293 0zM9.5 3.5v-2l3 3h-2a1 1 0 0 1-1-1zm-1 4v3.793l1.146-1.147a.5.5 0 0 1 .708.708l-2 2a.5.5 0 0 1-.708 0l-2-2a.5.5 0 0 1 .708-.708L7.5 11.293V7.5a.5.5 0 0 1 1 0z" />
     </svg> for <b>loading</b>
+- Display the colocating files and folders
 
 ---
 ## Limitations

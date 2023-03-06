@@ -21,11 +21,11 @@ import type { Node, Edge } from 'reactflow';
 import type { VisualizerProps } from './visualizer';
 
 export const getNodesAndEdges = (props: VisualizerProps) => {
-  const { path, baseURL, hideColocation } = props;
+  const { path, baseURL, displayColocation } = props;
   // initialize the tree of routes
   let route = getRoutes(path, baseURL);
   // hide colocation if the option is set
-  if (hideColocation) route = postorderTraversal(route, hideColocationFn);
+  if (!displayColocation) route = postorderTraversal(route, hideColocationFn);
   // set the spans of the tree route (nodes)
   route = postorderTraversal(route, setRouteSpans);
   // position the tree nodes
@@ -418,7 +418,7 @@ const postorderTraversal = (route: Route, modifierFn: (route: Route) => Route) =
 }
 
 /**
- * 
+ * hide collocation by removing the route subtrees that don't have a next file
  * @param route 
  * @returns 
  */
@@ -433,9 +433,7 @@ const hideColocationFn = (route: Route) => {
     const child = route.children[i];
 
     // Check if any included file starts with "page." or "route."
-    const hasPageOrRouteFile = child?.data?.nextFiles.some(
-      fileName => fileName.startsWith('page.') || fileName.startsWith('route.')
-    );
+    const hasPageOrRouteFile = child?.data?.nextFiles.length > 0;
 
     // Delete child node if it doesn't have a page or route file and has no children
     if (!hasPageOrRouteFile && (!child.children || child.children.length === 0)) {
