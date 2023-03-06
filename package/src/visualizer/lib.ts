@@ -82,7 +82,7 @@ export const getRoutesHelper = (path: string, link: string, depth: number = 0, p
   try {
     // Get all elements in the path and split them into folders and files
     const elements = fs.readdirSync(path);
-    const [folders, files] = elements.reduce(
+    const [folders, nextFiles,otherFiles] = elements.reduce(
       (acc, element) => {
         const fullPath = `${path}/${element}`;
         if (isDirectory(fullPath)) {
@@ -93,9 +93,10 @@ export const getRoutesHelper = (path: string, link: string, depth: number = 0, p
           acc[1].push(element);
           return acc;
         }
+        acc[2].push(element);
         return acc;
       },
-      [[], []] as string[][],
+      [[], [], []] as string[][],
     );
 
     const isGroup = isRouteGroup(path)
@@ -113,16 +114,16 @@ export const getRoutesHelper = (path: string, link: string, depth: number = 0, p
     const routeName = path.split('/')?.pop() ?? path;
     if (isGroup) depth = depth - 1;
 
-    // use a reduce to seperate the files into next files and other files
-    const { nextFiles, otherFiles } = files.reduce(
-      (acc, file) => {
-        const isNextFile = NEXT_FILES.some((nextFile) => file.startsWith(nextFile));
-        if (isNextFile) acc.nextFiles.push(file);
-        else acc.otherFiles.push(file);
-        return acc;
-      },
-      { nextFiles: [], otherFiles: [] } as { nextFiles: string[]; otherFiles: string[] },
-    );
+    // // use a reduce to seperate the files into next files and other files
+    // const { nextFiles, otherFiles } = files.reduce(
+    //   (acc, file) => {
+    //     const isNextFile = NEXT_FILES.some((nextFile) => file.startsWith(nextFile));
+    //     if (isNextFile) acc.nextFiles.push(file);
+    //     else acc.otherFiles.push(file);
+    //     return acc;
+    //   },
+    //   { nextFiles: [], otherFiles: [] } as { nextFiles: string[]; otherFiles: string[] },
+    // );
 
     const data: RouteData = {
       id: routeID,

@@ -17,9 +17,9 @@ export const logRoute = (route: Route, indent?: string) => {
   console.log(`${indent ?? ''}  directlySpanning: ${route.data.directlySpanning},`);
   console.log(`${indent ?? ''}  type: ${route.data.type},`);
   route.data.parentID ? console.log(`${indent ?? ''}  parentID: ${route.data.parentID},`) : null;
-  if (route.data.includedFiles) {
+  if (route.data.nextFiles) {
     console.log(`${indent ?? ''}  includedFiles: {`);
-    Object.keys(route.data.includedFiles).map((file) => {
+    route.data.nextFiles.map((file) => {
       console.log(`${indent ?? ''}    ${file},`);
     });
     console.log(`${indent ?? ''}  },`);
