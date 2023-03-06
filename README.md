@@ -63,11 +63,13 @@ import Visualizer from 'next-route-visualizer';
 
 export default function Home() {
   return (
-    <Visualizer path="blog" baseURL="https://example.com" />
+    <Visualizer path="blog" baseURL="https://example.com" displayColocation/>
   )
 }
 ```
 Only the sub-routes of `blog` (blog included) will be displayed on the chart. This assumes that `blog` is a direct sub-route of the app root (i.e ./app/blog in your file system).
+
+Since `displayColocation` was also provided, all the colocating files and folders will also be included on the chart.
 
 ---
 ## Features
