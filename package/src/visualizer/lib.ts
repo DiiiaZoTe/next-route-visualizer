@@ -1,7 +1,7 @@
 import fs from 'fs';
 import { createHash } from 'crypto';
 
-import type { Route, RouteData } from './types';
+import type { NodeData, Route, RouteData } from './types';
 import { routeToArray } from './utils';
 
 import {
@@ -82,7 +82,7 @@ export const getRoutesHelper = (path: string, link: string, depth: number = 0, p
   try {
     // Get all elements in the path and split them into folders and files
     const elements = fs.readdirSync(path);
-    const [folders, nextFiles,otherFiles] = elements.reduce(
+    const [folders, nextFiles, otherFiles] = elements.reduce(
       (acc, element) => {
         const fullPath = `${path}/${element}`;
         if (isDirectory(fullPath)) {
@@ -106,24 +106,11 @@ export const getRoutesHelper = (path: string, link: string, depth: number = 0, p
     const isSegment = isRouteSegment(path)
     // if the path is a route segment, the link should be the parent link + a star
     if (isSegment) link = `${link.split('/').slice(0, -1).join('/')}/*`
-    // find the name's index in the link
-
 
     // create route data
     const routeID = createHash('sha256').update(path).digest('hex');
     const routeName = path.split('/')?.pop() ?? path;
     if (isGroup) depth = depth - 1;
-
-    // // use a reduce to seperate the files into next files and other files
-    // const { nextFiles, otherFiles } = files.reduce(
-    //   (acc, file) => {
-    //     const isNextFile = NEXT_FILES.some((nextFile) => file.startsWith(nextFile));
-    //     if (isNextFile) acc.nextFiles.push(file);
-    //     else acc.otherFiles.push(file);
-    //     return acc;
-    //   },
-    //   { nextFiles: [], otherFiles: [] } as { nextFiles: string[]; otherFiles: string[] },
-    // );
 
     const data: RouteData = {
       id: routeID,
@@ -264,7 +251,12 @@ const positionTree = (root: Route) => {
 
     // logic to calculate the x and y coordinates of the node
     const siblingsCurrentSpan = siblingSpan.slice(0).reduce((acc, curr, index) => index < currentIndex ? acc + curr : acc, 0);
-    route.data.x = parentX - (parentSpan / 2) + siblingsCurrentSpan + (route.data.spanSize / 2) + (NODE_SPACING_X * currentIndex);
+    route.data.x =
+      parentX
+      - (parentSpan / 2)
+      + siblingsCurrentSpan
+      + (route.data.spanSize / 2)
+      + (NODE_SPACING_X * currentIndex);
     route.data.y = route.data.depth * (NODE_SPACING_Y + NODE_HEIGHT);
 
     //! below is the logic to keep traversing the tree
@@ -331,7 +323,7 @@ export const createNodesAndEdges = (route: Route) => {
         childrenID: current.childrenID,
         nextFiles: current.nextFiles,
         otherFiles: current.otherFiles,
-      },
+      } as NodeData,
       type: 'routeNode',
       position: { x: current.x ?? 0, y: current.y ?? 0 },
       deletable: false,
@@ -434,7 +426,7 @@ const hideColocationFn = (route: Route) => {
     const child = route.children[i];
 
     // Check if any included file starts with "page." or "route."
-    const hasPageOrRouteFile = child?.data?.nextFiles.length > 0;
+    const hasPageOrRouteFile = child?.data?.nextFiles?.length ? true : false;
 
     // Delete child node if it doesn't have a page or route file and has no children
     if (!hasPageOrRouteFile && (!child.children || child.children.length === 0)) {

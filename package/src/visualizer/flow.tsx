@@ -35,8 +35,8 @@ const defaultEdgeOptions = {
 };
 
 interface FlowProps {
-  initialNodes: Node<any>[];
-  initialEdges: Edge<any>[];
+  initialNodes: Node[];
+  initialEdges: Edge[];
 }
 
 const Flow = (props: FlowProps) => {
@@ -77,7 +77,7 @@ const Flow = (props: FlowProps) => {
     );
   }, [selectedNodeID, setNodes, props.initialNodes]);
 
-  const nodeColor = (node: Node) => {
+  const nodeColor = (node: Node): string => {
     return node?.data?.color || "#ccc";
   };
 
@@ -85,9 +85,9 @@ const Flow = (props: FlowProps) => {
     return nodes.find((node) => node.id === selectedNodeID);
   }, [selectedNodeID, nodes]);
 
-  const validLink = useMemo(() => {
+  const validLink: string = useMemo(() => {
     if (!selectedNode?.data?.link) return "";
-    const hasLink = selectedNode?.data?.nextFiles.some((file) => {
+    const hasLink = selectedNode?.data?.nextFiles.some((file: string) => {
       return file.startsWith("page.") || file.startsWith("route.");
     });
     return hasLink ? selectedNode?.data?.link : "";
@@ -147,7 +147,7 @@ const Flow = (props: FlowProps) => {
         </div>
         <div className={styles.sideDashGroup}>
           <p className={styles.sideDashGroupHeader}>NextJS files:</p>
-          {selectedNode?.data?.nextFiles?.map((file) => {
+          {selectedNode?.data?.nextFiles?.map((file: string) => {
             return (
               <p key={file} className={styles.sideDashGroupItem}>
                 {file}
@@ -166,7 +166,7 @@ const Flow = (props: FlowProps) => {
         </div>
         <div className={styles.sideDashGroup}>
           <p className={styles.sideDashGroupHeader}>Other files:</p>
-          {selectedNode?.data?.otherFiles?.map((file) => {
+          {selectedNode?.data?.otherFiles?.map((file: string) => {
             return (
               <p key={file} className={styles.sideDashGroupItem}>
                 {file}
@@ -184,6 +184,7 @@ const Flow = (props: FlowProps) => {
           </a>
         </div>
       </div>
+      
       <ReactFlow
         nodes={nodes}
         onNodesChange={onNodesChange}

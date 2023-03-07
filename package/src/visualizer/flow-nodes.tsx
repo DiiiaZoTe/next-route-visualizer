@@ -18,6 +18,7 @@ import {
 } from "./other-components";
 
 import styles from "./styles.module.css";
+import { NodeData } from "./types";
 
 const SELECTION_BOX = 50;
 
@@ -57,7 +58,7 @@ const SelectedBox: CSSProperties = {
   borderRadius: `${NODE_BORDER_RADIUS + 5}px`,
 };
 
-const RouteNode: FC<NodeProps> = ({ id, data, xPos, yPos }) => {
+const RouteNode: FC<NodeProps> = ({ id, data}: {id: string, data: NodeData}) => {
   return (
     <>
       <div style={Box}>

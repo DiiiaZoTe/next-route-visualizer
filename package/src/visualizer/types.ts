@@ -5,8 +5,8 @@ export type RouteData = {
   type: string | 'Route' | 'Group' | 'Segment' | 'Root';
   link: string;
   depth: number;
-  maxSpan?: number;
-  spanSize?: number;
+  maxSpan: number;
+  spanSize: number;
   directlySpanning: number;
   parentID?: string;
   nextFiles?: string[];
@@ -19,4 +19,18 @@ export type RouteData = {
 export type Route = {
   data: RouteData;
   children?: Route[];
+}
+
+export type NodeData = {
+  name: string;
+  path: string;
+  link: string;
+  parentID: string;
+  type: string;
+  color: string;
+  borderColor: string;
+  childrenID: string[];
+  nextFiles: string[];
+  otherFiles: string[];
+  selected?: boolean;
 }
