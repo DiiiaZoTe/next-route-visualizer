@@ -21,13 +21,11 @@ import type { Node, Edge } from 'reactflow';
 import type { VisualizerProps } from './visualizer';
 
 export const getNodesAndEdges = (props: VisualizerProps) => {
-  const { path, baseURL, displayColocation } = props;
+  const { path, baseURL, displayColocating } = props;
   // initialize the tree of routes
   let route = getRoutes(path, baseURL);
   // hide colocation if the option is set
-  if (!displayColocation) route = postorderTraversal(route, hideColocationFn);
-  // set the spans of the tree route (nodes)
-  route = postorderTraversal(route, setRouteSpans);
+  if (!displayColocating) route = postorderTraversal(route, hideColocatingFn);
   // position the tree nodes
   route = positionTree(route);
   // create the nodes and edges
@@ -118,7 +116,7 @@ export const getRoutesHelper = (path: string, link: string, depth: number = 0, p
       path,
       link,
       depth,
-      type: parentID === undefined ? 'Root' : isGroup ? 'Group' : isSegment ? 'Segment' : 'Route',
+      type: parentID === undefined ? 'Root' : isGroup ? 'Group' : isSegment ? 'Segment' : 'Route', // check Colocating later
       parentID,
       maxSpan: 1,
       spanSize: NODE_WIDTH,
@@ -135,10 +133,16 @@ export const getRoutesHelper = (path: string, link: string, depth: number = 0, p
       ...folders.map((folder, index) => getRoutesHelper(`${path}/${folder}`, `${link}/${folder}`, depth + 1, routeID)),
     ];
 
-    const route: Route = {
+    // create route
+    let route: Route = {
       data,
       children,
     };
+
+    // check colocating and set spans. Do this here to avoid traversing the tree later. 
+    route = isColocating(route);
+    route = setRouteSpans(route);
+
     return route;
   } catch (error: any) {
     throw new Error(`Path: ${path} is not a valid path \n${error}`);
@@ -389,6 +393,9 @@ const getNodeColorsByType = (type: string) => {
     case 'Root':
       //tailwind blue-100 and blue-500
       return { color: '#dbedff', borderColor: '#2563eb' };
+    case 'Colocating':
+      //tailwind orange-100 and orange-500
+      return { color: '#ffedd5', borderColor: '#f97316' };
     default:
       // like Route
       return { color: '#ede9fe', borderColor: '#8b5cf6' };
@@ -415,7 +422,7 @@ const postorderTraversal = (route: Route, modifierFn: (route: Route) => Route) =
  * @param route 
  * @returns 
  */
-const hideColocationFn = (route: Route) => {
+const hideColocatingFn = (route: Route) => {
   // if no children, return route
   if (!route.children || route.children.length === 0) {
     return route;
@@ -425,17 +432,33 @@ const hideColocationFn = (route: Route) => {
   for (let i = 0; i < route.children.length; i++) {
     const child = route.children[i];
 
-    // Check if any included file starts with "page." or "route."
-    const hasPageOrRouteFile = child?.data?.nextFiles?.length ? true : false;
-
-    // Delete child node if it doesn't have a page or route file and has no children
-    if (!hasPageOrRouteFile && (!child.children || child.children.length === 0)) {
+    if (child.data.type === 'Colocating') {
       route.children.splice(i, 1);
       i--;
     }
   }
   return route;
 }
+
+/**
+ * check if a route is colocating and set the type to Colocating
+ * @param route 
+ * @returns 
+ */
+const isColocating = (route: Route) => {
+  // check if contains next files
+  const hasPageOrRouteFile = route?.data?.nextFiles?.length ? true : false;
+
+  // check if children are all colocating, if no children then consider possible colocating
+  const allChildrenAreColocating = route.children?.every(child => child.data.type === 'Colocating') ?? true;
+
+  if (!hasPageOrRouteFile && allChildrenAreColocating)
+    route.data.type = 'Colocating';
+
+  return route;
+}
+
+
 
 /**
  * Set the spans for the route and subroutes.

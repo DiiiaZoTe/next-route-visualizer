@@ -2,7 +2,7 @@ export type RouteData = {
   id: string;
   name: string;
   path: string;
-  type: string | 'Route' | 'Group' | 'Segment' | 'Root';
+  type: string | 'Route' | 'Group' | 'Segment' | 'Root' | 'Colocating';
   link: string;
   depth: number;
   maxSpan: number;

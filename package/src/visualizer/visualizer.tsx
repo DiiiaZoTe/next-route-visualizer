@@ -19,18 +19,18 @@ export type VisualizerProps = {
    * hide colocating folders in the visualizer
    * @default boolean false
    */
-  displayColocation?: boolean;
+  displayColocating?: boolean;
 };
 
 export const Visualizer = ({
   path,
   baseURL = "http://localhost:3000",
-  displayColocation = false,
+  displayColocating = false,
 }: VisualizerProps) => {
   const { nodes, edges } = getNodesAndEdges({
     path,
     baseURL,
-    displayColocation,
+    displayColocating,
   });
   return (
     <>

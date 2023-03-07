@@ -51,7 +51,7 @@ That's it! The **`Visualizer`** component will render a tree chart that displays
 | ----------------- | -------------------- | ------------
 | path              | String or undefined  |  <p>Path to the starting route (relative to the app directory).<br/>If not provided, the component will search for the app directory within the root folder or .src/ folder.</p>
 | baseURL           | String or undefined  | <p>Base URL of your project.<br/>Default: http://localhost:3000</p>
-| displayColocation | Boolean or undefined | <p>Display colocating folders<br/>Default: false</p>
+| displayColocating | Boolean or undefined | <p>Display colocating folders<br/>Default: false</p>
 
 ---
 ## Example
@@ -63,13 +63,13 @@ import Visualizer from 'next-route-visualizer';
 
 export default function Home() {
   return (
-    <Visualizer path="blog" baseURL="https://example.com" displayColocation/>
+    <Visualizer path="blog" baseURL="https://example.com" displayColocating/>
   )
 }
 ```
 Only the sub-routes of `blog` (blog included) will be displayed on the chart. This assumes that `blog` is a direct sub-route of the app root (i.e ./app/blog in your file system).
 
-Since `displayColocation` was also provided, all the colocating files and folders will also be included on the chart.
+Since `displayColocating` was also provided, all the colocating folders will also be included on the chart.
 
 ---
 ## Features
