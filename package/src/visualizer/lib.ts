@@ -437,6 +437,8 @@ const hideColocatingFn = (route: Route) => {
       i--;
     }
   }
+  route = setRouteSpans(route);
+
   return route;
 }
 
@@ -489,7 +491,7 @@ const setRouteSpans = (route: Route) => {
  * @param routes 
  * @returns 
  */
-const getSpan = (routes: Route[],) => {
+const getSpan = (routes: Route[]) => {
   let routeGroupsSpan = 0;
   let routesSpan = 0;
   let numberOfGroups = 0;
