@@ -75,26 +75,26 @@ const RouteNode: FC<NodeProps> = ({
           {data.name}
         </p>
         <div className={styles.nodeIconsContainer}>
-          {data.nextFiles?.find((file) => file.name.startsWith("page.")) ? (
+          {data.nextFiles?.find((file) => file.name.match("page")) ? (
             <FilesPageIcon color={data.borderColor} />
           ) : null}
           {data.nextFiles?.find(
             (file) =>
-              file.name.startsWith("error.") || file.name.startsWith("error.")
+              file.name.match("error") || file.name.match("error")
           ) ? (
             <FilesErrorIcon color={data.borderColor} />
           ) : null}
           {data.nextFiles?.find(
             (file) =>
-              file.name.startsWith("layout.") ||
-              file.name.startsWith("template.")
+              file.name.match("layout") ||
+              file.name.match("template")
           ) ? (
             <FilesLayoutIcon color={data.borderColor} />
           ) : null}
-          {data.nextFiles?.find((file) => file.name.startsWith("route.")) ? (
+          {data.nextFiles?.find((file) => file.name.match("route")) ? (
             <FilesRouteIcon color={data.borderColor} />
           ) : null}
-          {data.nextFiles?.find((file) => file.name.startsWith("loading.")) ? (
+          {data.nextFiles?.find((file) => file.name.match("loading")) ? (
             <FilesLoadingIcon color={data.borderColor} />
           ) : null}
         </div>

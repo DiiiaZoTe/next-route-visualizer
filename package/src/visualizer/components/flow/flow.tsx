@@ -85,7 +85,7 @@ const Flow = (props: FlowProps) => {
   const validLink: string = useMemo(() => {
     if (!selectedNode?.data?.link) return "";
     const hasLink = selectedNode?.data?.nextFiles.some((file: File) => {
-      return file.name.startsWith("page.") || file.name.startsWith("route.");
+      return file.name.match("page") || file.name.match("route");
     });
     return hasLink ? selectedNode?.data?.link : "";
   }, [selectedNode]);
@@ -147,7 +147,7 @@ const Flow = (props: FlowProps) => {
           {selectedNode?.data?.nextFiles?.map((file: File) => {
             return (
               <p key={file.name} className={styles.sideDashGroupItem}>
-                {file.name}
+                {file.name}.{file.extension}
               </p>
             );
           })}
@@ -166,7 +166,7 @@ const Flow = (props: FlowProps) => {
           {selectedNode?.data?.otherFiles?.map((file: File) => {
             return (
               <p key={file.name} className={styles.sideDashGroupItem}>
-                {file.name}
+                {file.name}.{file.extension}
               </p>
             );
           })}
