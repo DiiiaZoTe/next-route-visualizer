@@ -191,29 +191,6 @@
   justify-content: center;
 }
 
-/* ===== NODE CSS ===== */
-.nodeSelected {
-  opacity: 0;
-  transition: all 0.2s ease-in-out;
-  cursor: pointer;
-}
-
-.nodeSelected[data-selected="false"]:hover {
-  opacity: 0.2;
-}
-
-.nodeSelected[data-selected="true"] {
-  opacity: 1;
-}
-
-.nodeIconsContainer {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  gap: 1rem;
-  flex-wrap: wrap;
-}
-
 @-webkit-keyframes rotating /* Safari and Chrome */ {
   from {
     -webkit-transform: rotate(0deg);

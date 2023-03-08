@@ -95,7 +95,6 @@ export const CloseIcon = ({ color }: { color?: string }) => {
   );
 };
 
-
 export const GithubLogo = () => {
   return (
     <svg width="24" height="24" viewBox="0 0 98 96">

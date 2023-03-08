@@ -8,17 +8,17 @@ import {
   NODE_HEIGHT,
   NODE_BORDER,
   NODE_BORDER_RADIUS,
-} from "./constants";
+} from "../../constants";
 import {
   FilesPageIcon,
   FilesErrorIcon,
   FilesLayoutIcon,
   FilesLoadingIcon,
   FilesRouteIcon,
-} from "./other-components";
+} from "../icons";
 
-import styles from "./styles.module.css";
-import { NodeData } from "./types";
+import styles from "./nodes-flow.module.css";
+import { NodeData } from "../../types";
 
 const SELECTION_BOX = 50;
 
@@ -58,7 +58,13 @@ const SelectedBox: CSSProperties = {
   borderRadius: `${NODE_BORDER_RADIUS + 5}px`,
 };
 
-const RouteNode: FC<NodeProps> = ({ id, data}: {id: string, data: NodeData}) => {
+const RouteNode: FC<NodeProps> = ({
+  id,
+  data,
+}: {
+  id: string;
+  data: NodeData;
+}) => {
   return (
     <>
       <div style={Box}>
@@ -69,23 +75,26 @@ const RouteNode: FC<NodeProps> = ({ id, data}: {id: string, data: NodeData}) => 
           {data.name}
         </p>
         <div className={styles.nodeIconsContainer}>
-          {data.nextFiles?.find((file) => file.startsWith("page.")) ? (
+          {data.nextFiles?.find((file) => file.name.startsWith("page.")) ? (
             <FilesPageIcon color={data.borderColor} />
           ) : null}
           {data.nextFiles?.find(
-            (file) => file.startsWith("error.") || file.startsWith("error.")
+            (file) =>
+              file.name.startsWith("error.") || file.name.startsWith("error.")
           ) ? (
             <FilesErrorIcon color={data.borderColor} />
           ) : null}
           {data.nextFiles?.find(
-            (file) => file.startsWith("layout.") || file.startsWith("template.")
+            (file) =>
+              file.name.startsWith("layout.") ||
+              file.name.startsWith("template.")
           ) ? (
             <FilesLayoutIcon color={data.borderColor} />
           ) : null}
-          {data.nextFiles?.find((file) => file.startsWith("route.")) ? (
+          {data.nextFiles?.find((file) => file.name.startsWith("route.")) ? (
             <FilesRouteIcon color={data.borderColor} />
           ) : null}
-          {data.nextFiles?.find((file) => file.startsWith("loading.")) ? (
+          {data.nextFiles?.find((file) => file.name.startsWith("loading.")) ? (
             <FilesLoadingIcon color={data.borderColor} />
           ) : null}
         </div>

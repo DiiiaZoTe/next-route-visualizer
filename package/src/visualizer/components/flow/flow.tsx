@@ -15,15 +15,12 @@ import ReactFlow, {
 } from "reactflow";
 import "reactflow/dist/base.css";
 
-import RouteNode from "./flow-nodes";
-import {
-  CloseIcon,
-  ExternalLinkIcon,
-  GithubLogo,
-  RefreshIcon,
-} from "./other-components";
-import { NODE_WIDTH, NODE_HEIGHT, NODE_BORDER } from "./constants";
-import styles from "./styles.module.css";
+import RouteNode from "./nodes-flow";
+import { CloseIcon, ExternalLinkIcon, GithubLogo, RefreshIcon } from "../icons";
+import { NODE_WIDTH, NODE_HEIGHT, NODE_BORDER } from "../../constants";
+import styles from "./flow.module.css";
+
+import type { File } from "../../types";
 
 const nodeTypes = {
   routeNode: RouteNode,
@@ -87,8 +84,8 @@ const Flow = (props: FlowProps) => {
 
   const validLink: string = useMemo(() => {
     if (!selectedNode?.data?.link) return "";
-    const hasLink = selectedNode?.data?.nextFiles.some((file: string) => {
-      return file.startsWith("page.") || file.startsWith("route.");
+    const hasLink = selectedNode?.data?.nextFiles.some((file: File) => {
+      return file.name.startsWith("page.") || file.name.startsWith("route.");
     });
     return hasLink ? selectedNode?.data?.link : "";
   }, [selectedNode]);
@@ -147,10 +144,10 @@ const Flow = (props: FlowProps) => {
         </div>
         <div className={styles.sideDashGroup}>
           <p className={styles.sideDashGroupHeader}>NextJS files:</p>
-          {selectedNode?.data?.nextFiles?.map((file: string) => {
+          {selectedNode?.data?.nextFiles?.map((file: File) => {
             return (
-              <p key={file} className={styles.sideDashGroupItem}>
-                {file}
+              <p key={file.name} className={styles.sideDashGroupItem}>
+                {file.name}
               </p>
             );
           })}
@@ -166,10 +163,10 @@ const Flow = (props: FlowProps) => {
         </div>
         <div className={styles.sideDashGroup}>
           <p className={styles.sideDashGroupHeader}>Other files:</p>
-          {selectedNode?.data?.otherFiles?.map((file: string) => {
+          {selectedNode?.data?.otherFiles?.map((file: File) => {
             return (
-              <p key={file} className={styles.sideDashGroupItem}>
-                {file}
+              <p key={file.name} className={styles.sideDashGroupItem}>
+                {file.name}
               </p>
             );
           })}
@@ -184,7 +181,7 @@ const Flow = (props: FlowProps) => {
           </a>
         </div>
       </div>
-      
+
       <ReactFlow
         nodes={nodes}
         onNodesChange={onNodesChange}

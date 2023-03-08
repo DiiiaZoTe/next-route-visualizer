@@ -15,7 +15,7 @@
     "isolatedModules": true,
     "target": "es6",
     "module": "esnext",
-    "typeRoots": ["../../node_modules/@types", "./typings"]
+    "typeRoots": ["../../node_modules/@types", "./typings"],
   },
   "include": [
     "**/*.ts",
