@@ -1,6 +1,6 @@
 "use client";
-
-import { memo, FC, CSSProperties, useMemo } from "react";
+import React from "react";
+import { memo, FC, CSSProperties } from "react";
 import { Handle, Position, NodeProps } from "reactflow";
 import {
   HANDLE_SIZE,
@@ -16,9 +16,10 @@ import {
   FilesLoadingIcon,
   FilesRouteIcon,
 } from "../icons";
-
-import styles from "./nodes-flow.module.css";
 import { NodeData } from "../../types";
+// @ts-ignore
+import styles from "../../styles/nodes-flow.module.css";
+
 
 const SELECTION_BOX = 50;
 

@@ -180,14 +180,15 @@
   background: #fafafa;
 }
 
-.sidedashGithub {
+.sideDashFooter {
   display: flex;
   align-items: center;
   justify-content: center;
   margin-top: auto;
+  gap: 1rem;
 }
 
-.sidedashGithub a {
+.sideDashFooter a {
   color: #000;
   text-decoration: none;
   font-weight: 600;
@@ -197,7 +198,7 @@
   gap: 0.5rem;
 }
 
-.sidedashGithub span {
+.sideDashFooter span {
   display: flex;
   align-items: center;
   justify-content: center;

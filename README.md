@@ -1,5 +1,6 @@
 <div align="center">
   <h1>next-route-visualizer</h1>
+  <b>v1.1.0</b>
   <p>A package for visualizing Next.js app directory routes.</p>
   <a href="https://next-route-visualizer.vercel.app">
     <b>Demo website</b>
@@ -83,6 +84,8 @@ Under the hood, **next-route-visualizer** utilizes **[ReactFlow](https://reactfl
   - Type
   - Next.js files
   - Other files (non Next files)
+- Display if RSC or Client according to the file having the `'use client'` statement.
+  This may not be 100% exact...
 - Route selection: Select a Route from the chart to see its information
 - Node type colors: The nodes in the chart have different colors based on the type of route:
   - Root: Entry point
@@ -129,7 +132,7 @@ For that reason, **you must refresh the page** to see any changes that you appli
 
 ---
 ## Future work
-This is only side project. The code is definitely a mess and I was too lazy to provide testing for it. I may be open to make a few changes on my free time if I feel like it.
+This is only a side project. The code is definitely a mess and I was too lazy to provide testing for it. I may be open to make a few changes on my free time if I feel like it.
 
 On that note, please feel free to use and make any changes that you wish to include.
 

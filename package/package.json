@@ -1,6 +1,6 @@
 {
   "name": "next-route-visualizer",
-  "version": "1.0.2",
+  "version": "1.1.0",
   "description": "Visualize your Next.js app directory routes",
   "main": "dist/visualizer/index.js",
   "types": "types/src/visualizer/index.d.ts",
@@ -20,8 +20,10 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "cleanup": "rm -rf dist && rm -rf types",
-    "build": "babel src -d dist --extensions \".ts,.tsx\" --ignore \"**/*.test.tsx\" && cp src/visualizer/styles.module.css dist/visualizer/styles.module.css",
-    "build:types": "tsc -d --emitDeclarationOnly --outDir types"
+    "build-dist": "babel src -d dist --extensions \".ts,.tsx\" --ignore \"**/*.test.tsx\"",
+    "copy-css": "cp -r src/visualizer/styles dist/visualizer/styles",
+    "build:types": "tsc -d --emitDeclarationOnly --outDir types",
+    "build": "npm run cleanup && npm run build-dist && npm run copy-css && npm run build:types"
   },
   "devDependencies": {
     "@babel/cli": "^7.21.0",

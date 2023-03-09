@@ -1,3 +1,5 @@
+import React from 'react';
+
 export const ExternalLinkIcon = ({ color }: { color?: string }) => {
   return (
     <svg

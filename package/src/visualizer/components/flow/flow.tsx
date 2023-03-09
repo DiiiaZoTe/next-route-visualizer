@@ -18,7 +18,9 @@ import "reactflow/dist/base.css";
 import RouteNode from "./nodes-flow";
 import { CloseIcon, ExternalLinkIcon, GithubLogo, RefreshIcon } from "../icons";
 import { NODE_WIDTH, NODE_HEIGHT, NODE_BORDER } from "../../constants";
-import styles from "./flow.module.css";
+
+// @ts-ignore
+import styles from "../../styles/flow.module.css";
 
 import type { File } from "../../types";
 
@@ -188,7 +190,8 @@ const Flow = (props: FlowProps) => {
             <p className={styles.sideDashGroupItem}>None</p>
           ) : null}
         </div>
-        <div className={styles.sidedashGithub}>
+        <div className={styles.sideDashFooter}>
+          <p>v1.1.0</p>
           <a href="https://github.com/DiiiaZoTe/next-route-visualizer">
             <span>Github</span>
             <GithubLogo />
