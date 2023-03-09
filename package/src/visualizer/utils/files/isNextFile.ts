@@ -14,7 +14,7 @@ export const isNextFile = (path: string) => {
 
     // File name processing
     // split path by / and get last element
-    const fileName = path.split('/').pop();
+    const fileName = path.split('/').pop() ?? 'file-name-error';
     // extract file name and extension
     const { name: fileNameWithoutExtension, extension: fileExtension } = getFileNameExtension(fileName);
 

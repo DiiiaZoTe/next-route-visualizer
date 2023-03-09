@@ -1,4 +1,4 @@
-import { Route } from "src/visualizer/types";
+import { Route } from "../../types";
 
 /**
  * Determines if the path is a route group
