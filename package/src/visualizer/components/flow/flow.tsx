@@ -146,9 +146,16 @@ const Flow = (props: FlowProps) => {
           <p className={styles.sideDashGroupHeader}>NextJS files:</p>
           {selectedNode?.data?.nextFiles?.map((file: File) => {
             return (
-              <p key={file.name} className={styles.sideDashGroupItem}>
+              <div key={file.name} className={styles.sideDashGroupItem}>
                 {file.name}.{file.extension}
-              </p>
+                {file.isClient ? (
+                  <span className={styles.sideDashGroupItemRightTag}>
+                    client
+                  </span>
+                ) : (
+                  <span className={styles.sideDashGroupItemRightTag}>RSC</span>
+                )}
+              </div>
             );
           })}
           {selectedNode?.data?.nextFiles?.length === 0 ? (
@@ -165,9 +172,16 @@ const Flow = (props: FlowProps) => {
           <p className={styles.sideDashGroupHeader}>Other files:</p>
           {selectedNode?.data?.otherFiles?.map((file: File) => {
             return (
-              <p key={file.name} className={styles.sideDashGroupItem}>
+              <div key={file.name} className={styles.sideDashGroupItem}>
                 {file.name}.{file.extension}
-              </p>
+                {file.isClient ? (
+                  <span className={styles.sideDashGroupItemRightTag}>
+                    client
+                  </span>
+                ) : (
+                  <span className={styles.sideDashGroupItemRightTag}>RSC</span>
+                )}
+              </div>
             );
           })}
           {selectedNode?.data?.otherFiles?.length === 0 ? (

@@ -145,7 +145,10 @@
   border: 1px solid #eaeaea;
   box-sizing: border-box;
   font-family: monospace;
+  min-height: 2.6rem;
 }
+
+
 
 .sideDashGroupItemError {
   /* tailwincss rose-100 */
@@ -166,6 +169,15 @@
 
 .sideDashGroupLinkIcon[data-valid="false"] {
   pointer-events: none;
+}
+
+.sideDashGroupItemRightTag {
+  margin-left: auto;
+  font-weight: 600;
+  padding: 0.4rem;
+  border-radius: 0.2rem;
+  border: 1px solid #ccc;
+  background: #fafafa;
 }
 
 .sidedashGithub {
