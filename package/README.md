@@ -1,6 +1,6 @@
 <div align="center">
   <h1>next-route-visualizer</h1>
-  <b>v1.1.2</b>
+  <b>v1.1.3</b>
   <p>A package for visualizing Next.js app directory routes.</p>
   <a href="https://next-route-visualizer.vercel.app">
     <b>Demo website</b>
@@ -113,6 +113,7 @@ Under the hood, **next-route-visualizer** utilizes **[ReactFlow](https://reactfl
       <path d="M9.293 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V4.707A1 1 0 0 0 13.707 4L10 .293A1 1 0 0 0 9.293 0zM9.5 3.5v-2l3 3h-2a1 1 0 0 1-1-1zm-1 4v3.793l1.146-1.147a.5.5 0 0 1 .708.708l-2 2a.5.5 0 0 1-.708 0l-2-2a.5.5 0 0 1 .708-.708L7.5 11.293V7.5a.5.5 0 0 1 1 0z" />
     </svg> for <b>loading</b>
 - Display the colocating files and folders
+- Display if the page is SERVER or CLIENT on the chart node
 
 **Colors of the nodes are as followed:**
 

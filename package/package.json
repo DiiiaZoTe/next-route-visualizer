@@ -1,6 +1,6 @@
 {
   "name": "next-route-visualizer",
-  "version": "1.1.2",
+  "version": "1.1.3",
   "description": "Visualize your Next.js app directory routes",
   "main": "dist/visualizer/index.js",
   "types": "types/src/visualizer/index.d.ts",
@@ -9,7 +9,8 @@
     "Route",
     "Visualizer",
     "Visualize",
-    "Links"
+    "Links",
+    "Tree"
   ],
   "repository": {
     "type": "git",

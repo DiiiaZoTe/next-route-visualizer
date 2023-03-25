@@ -20,3 +20,17 @@
   gap: 1rem;
   flex-wrap: wrap;
 }
+
+.nodeClientServerType {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: fit-content;
+  height: fit-content;
+  color: white;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  font-size: 0.8rem;
+  transform: translate(-20px, -50%);
+  font-weight: bolder;
+}

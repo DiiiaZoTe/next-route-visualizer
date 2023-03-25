@@ -20,7 +20,6 @@ import { NodeData } from "../../types";
 // @ts-ignore
 import styles from "../../styles/nodes-flow.module.css";
 
-
 const SELECTION_BOX = 50;
 
 const HandleCommonStyle: CSSProperties = {
@@ -80,15 +79,12 @@ const RouteNode: FC<NodeProps> = ({
             <FilesPageIcon color={data.borderColor} />
           ) : null}
           {data.nextFiles?.find(
-            (file) =>
-              file.name.match("error") || file.name.match("error")
+            (file) => file.name.match("error") || file.name.match("error")
           ) ? (
             <FilesErrorIcon color={data.borderColor} />
           ) : null}
           {data.nextFiles?.find(
-            (file) =>
-              file.name.match("layout") ||
-              file.name.match("template")
+            (file) => file.name.match("layout") || file.name.match("template")
           ) ? (
             <FilesLayoutIcon color={data.borderColor} />
           ) : null}
@@ -129,6 +125,30 @@ const RouteNode: FC<NodeProps> = ({
         className={styles.nodeSelected}
         data-selected={data.selected ? "true" : "false"}
       />
+      {data.nextFiles?.map((file) =>
+        // if page file then show client if isClient otherwise show SSR
+        file.name.startsWith("page") ? (
+          file.isClient ? (
+            <p
+              className={styles.nodeClientServerType}
+              style={{
+                background: data.borderColor,
+              }}
+            >
+              CLIENT
+            </p>
+          ) : (
+            <p
+              className={styles.nodeClientServerType}
+              style={{
+                background: data.borderColor,
+              }}
+            >
+              SERVER
+            </p>
+          )
+        ) : null
+      )}
     </>
   );
 };

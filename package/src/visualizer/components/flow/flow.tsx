@@ -191,7 +191,7 @@ const Flow = (props: FlowProps) => {
           ) : null}
         </div>
         <div className={styles.sideDashFooter}>
-          <p>v1.1.0</p>
+          <p>v1.1.3</p>
           <a href="https://github.com/DiiiaZoTe/next-route-visualizer">
             <span>Github</span>
             <GithubLogo />
