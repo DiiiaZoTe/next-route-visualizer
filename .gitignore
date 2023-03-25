@@ -37,3 +37,7 @@ next-env.d.ts
 
 # vscode
 .vscode
+
+package/node_modules
+package/dist
+package/types

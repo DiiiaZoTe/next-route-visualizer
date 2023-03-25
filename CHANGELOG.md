@@ -1,5 +1,10 @@
 # Version changelog
 
+### v1.1.2: March 25th 2023
+- Skipped version 1.1.1
+- Fixed type issue that showed error when importing package
+  - types folder was missing in the package
+
 ### v1.1.0: March 8th 2023
 - Added display of files and components being **RSC** or **Client**
 - Refactoring of the entire project
