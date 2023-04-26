@@ -137,6 +137,9 @@ This is only a side project. The code is definitely a mess and I was too lazy to
 
 On that note, please feel free to use and make any changes that you wish to include.
 
+NOTE: April 25th 2023
+If I ever get some free time, I may try to add support for NextJS ^13.3.0 which added Parallel Routes and Interceptions.
+
 ---
 ## Dependencies
 - Next >= 13.2.3
